@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — Pratyush Kumar</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071018;
+      --surface: rgba(255, 255, 255, 0.06);
+      --surface-strong: rgba(255, 255, 255, 0.12);
+      --text: #f7fbff;
+      --muted: #a2b0c8;
+      --accent: #68d8ff;
+      --accent-strong: #8ce5ff;
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, rgba(104, 216, 255, 0.12), transparent 25%), var(--bg);
+      color: var(--text);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(130deg, rgba(104, 216, 255, 0.08), transparent 40%), linear-gradient(70deg, rgba(255, 255, 255, 0.04), transparent 36%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .topbar a {
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(104, 216, 255, 0.2);
+      padding: 10px 16px;
+      border-radius: 999px;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+    .topbar a:hover {
+      transform: translateY(-1px);
+      background: rgba(104, 216, 255, 0.08);
+    }
+    .hero {
+      padding: 32px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      letter-spacing: -0.04em;
+    }
+    .hero p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.05rem;
+    }
+    .hero .subtitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(104, 216, 255, 0.1);
+      color: var(--accent-strong);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+    .card {
+      padding: 28px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+      backdrop-filter: blur(14px);
+    }
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 1.4rem;
+    }
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .contact-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .contact-list a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .contact-list a:hover {
+      color: var(--accent-strong);
+    }
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 760px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div>
+        <div class="subtitle">Profile</div>
+      </div>
+      <a href="../index.html">Back to home</a>
+    </div>
+
+    <section class="hero">
+      <h1>Pratyush Kumar</h1>
+      <p>Full stack developer and tech writer with a strong focus on cloud infrastructure, Kubernetes backend systems, CI/CD automation, and production reliability.</p>
+      <p>I enjoy building stable systems and sharing practical updates through a lightweight newsletter that covers tech news, AI frameworks like LangChain, and developer tooling.</p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>About me</h2>
+        <p>Cloud infrastructure engineer who builds resilient backend platforms and automation workflows. My work centers on developer productivity, system reliability, and thoughtful technical communication.</p>
+      </section>
+
+      <section class="card">
+        <h2>Skills</h2>
+        <ul>
+          <li>Kubernetes, Docker, and container orchestration</li>
+          <li>CI/CD pipelines, automation, and infrastructure as code</li>
+          <li>Backend engineering, production reliability, and observability</li>
+          <li>AI-assisted development with LangChain and related frameworks</li>
+          <li>Technical writing and curated newsletter content</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Experience</h2>
+        <p>I build reliable systems for cloud-native environments, focusing on Kubernetes deployments and automation that keeps production services healthy and easy to manage.</p>
+      </section>
+
+      <section class="card">
+        <h2>Connect</h2>
+        <ul class="contact-list">
+          <li><a href="https://github.com/pkumar-vf" target="_blank" rel="noreferrer">GitHub /pkumar-vf</a></li>
+          <li><a href="https://in.linkedin.com/in/pratyush-kumar-jaiswal" target="_blank" rel="noreferrer">LinkedIn /pratyush-kumar-jaiswal</a></li>
+          <li><a href="mailto:pratyush.kr123@outlook.com">pratyush.kr123@outlook.com</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      © 2026 Pratyush Kumar — Vector Forces profile page
+    </footer>
+  </div>
+</body>
+</html>

@@ -5,41 +5,300 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vector Forces</title>
   <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070b;
+      --surface: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #9aa7bb;
+      --accent: #59d0ff;
+      --accent-strong: #6ee0ff;
+      --border: rgba(255, 255, 255, 0.16);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0a0a0a;
-      color: #ffffff;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, rgba(89, 208, 255, 0.12), transparent 30%), var(--bg);
+      color: var(--text);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(120deg, rgba(89,208,255,.08) 0%, transparent 42%), linear-gradient(60deg, rgba(99,179,255,.06) 0%, transparent 35%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+    header {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .brand-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin: 0;
+      letter-spacing: -0.04em;
+    }
+    .brand-subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+    .hero-intro {
+      max-width: 620px;
+    }
+    .hero-intro h1 {
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      margin: 0 0 18px;
+    }
+    .hero-intro p {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+    .hero-intro .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .button {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      padding: 14px 24px;
+      gap: 0.5rem;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #01070d;
+      box-shadow: 0 24px 40px rgba(33, 163, 232, 0.22);
+    }
+    .button-secondary {
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .button:hover {
+      transform: translateY(-1px);
+    }
+    .hero-card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
       text-align: center;
     }
-    .container {
-      max-width: 600px;
-      padding: 20px;
+    .hero-card h2 {
+      margin: 0 0 18px;
+      font-size: 1.8rem;
     }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+    .hero-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
     }
-    p {
-      color: #aaa;
-      font-size: 1.2rem;
+    .sections {
+      display: grid;
+      gap: 26px;
     }
-    .tag {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #666;
+    .section {
+      display: grid;
+      gap: 22px;
+      padding: 28px 32px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(12px);
+    }
+    .section h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .section p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .cards {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(89, 208, 255, 0.25);
+    }
+    .card-title {
+      margin: 0 0 12px;
+      font-size: 1.3rem;
+    }
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        min-height: 260px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Vector Forces</h1>
-    <p>Building intelligent systems at the intersection of technology and applied science.</p>
-    <div class="tag">Launching soon</div>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="pill">vector-forces.com</div>
+        <div>
+          <h1 class="brand-title">Vector Forces</h1>
+          <p class="brand-subtitle">A clean, modern home page for your personal brand and tech projects.</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="#projects" class="pill">Explore projects</a>
+        <a href="profile/index.html" class="pill">View my profile</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-intro">
+        <h1>Pratyush Kumar — full stack developer and tech writer</h1>
+        <p>Cloud infra engineer specializing in Kubernetes backend systems, CI/CD automation, and production reliability. I also publish a small newsletter for tech news and updates.</p>
+        <div class="actions">
+          <a class="button button-primary" href="profile/index.html">Visit my profile</a>
+          <a class="button button-secondary" href="#projects">See the projects</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div>
+          <h2>Welcome to Vector Forces</h2>
+          <p>This homepage introduces your newsletter, profile, and project thinking with a polished static design that stays easy to update.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sections" id="projects">
+      <section class="section">
+        <div class="tagline">Featured</div>
+        <h3>Projects worth sharing</h3>
+        <p>Vector Forces is more than a homepage. It is the place where your newsletter, personal profile, and other web experiments come together for visitors who want to learn more about your interests and technology updates.</p>
+      </section>
+
+      <div class="cards">
+        <article class="card">
+          <div class="tagline">Newsletter</div>
+          <h3 class="card-title">Static newsletter with tech news</h3>
+          <p>Publish a simple newsletter page with occasional updates about technology, AI, developer tools, and other ideas. It can stay minimal and static while still delivering fresh insights on a regular cadence.</p>
+        </article>
+
+        <article class="card">
+          <div class="tagline">Profile</div>
+          <h3 class="card-title">Pratyush Kumar — cloud infrastructure and reliability</h3>
+          <p>Discover a profile page for a developer focused on Kubernetes, backend systems, CI/CD automation, and production reliability, with links to GitHub, LinkedIn, and email.</p>
+        </article>
+
+        <article class="card">
+          <div class="tagline">All-in-one</div>
+          <h3 class="card-title">Everything else</h3>
+          <p>Use the homepage to point people to additional content like projects, experiments, resources, or future releases. Keep the site flexible so new sections can be added without changing the core design.</p>
+        </article>
+      </div>
+    </div>
+
+    <section class="section" id="about">
+      <div class="tagline">About</div>
+      <h3>Your home page for Vector Forces</h3>
+      <p>This repo contains the home page for vector-forces.com. It is built as a clean static landing page that highlights your upcoming newsletter, personal profile, and the broader mission of sharing tech updates and ideas.</p>
+    </section>
+
+    <footer>
+      <span>© 2026 Vector Forces</span>
+      <span>Designed for a simple, modern web presence</span>
+    </footer>
   </div>
 </body>
 </html>
